@@ -10,7 +10,8 @@ import SwiftUI
 @main
 struct CarDataAPPApp: App {
     let persistenceController = PersistenceController.shared
-
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

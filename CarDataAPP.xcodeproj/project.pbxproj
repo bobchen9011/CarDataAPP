@@ -16,6 +16,16 @@
 		997F596E2C7185BF00BE491E /* CarDataAPPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F596D2C7185BF00BE491E /* CarDataAPPTests.swift */; };
 		997F59782C7185BF00BE491E /* CarDataAPPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59772C7185BF00BE491E /* CarDataAPPUITests.swift */; };
 		997F597A2C7185BF00BE491E /* CarDataAPPUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59792C7185BF00BE491E /* CarDataAPPUITestsLaunchTests.swift */; };
+		997F598F2C71900600BE491E /* CarPlateID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F598E2C71900600BE491E /* CarPlateID.swift */; };
+		997F59912C71903D00BE491E /* AddPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59902C71903D00BE491E /* AddPlateView.swift */; };
+		997F59932C71905200BE491E /* PlateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59922C71905200BE491E /* PlateDetailView.swift */; };
+		997F59952C7195C400BE491E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 997F59942C7195C400BE491E /* GoogleService-Info.plist */; };
+		997F59982C71964F00BE491E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 997F59972C71964F00BE491E /* FirebaseAnalytics */; };
+		997F599A2C71964F00BE491E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 997F59992C71964F00BE491E /* FirebaseDatabase */; };
+		997F599C2C71964F00BE491E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 997F599B2C71964F00BE491E /* FirebaseStorage */; };
+		997F599E2C71964F00BE491E /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 997F599D2C71964F00BE491E /* FirebaseStorageCombine-Community */; };
+		997F59A12C71977100BE491E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 997F59A02C71977100BE491E /* FirebaseFirestore */; };
+		997F59A32C71A9A200BE491E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59A22C71A9A200BE491E /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +58,11 @@
 		997F59732C7185BF00BE491E /* CarDataAPPUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarDataAPPUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		997F59772C7185BF00BE491E /* CarDataAPPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDataAPPUITests.swift; sourceTree = "<group>"; };
 		997F59792C7185BF00BE491E /* CarDataAPPUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDataAPPUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		997F598E2C71900600BE491E /* CarPlateID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlateID.swift; sourceTree = "<group>"; };
+		997F59902C71903D00BE491E /* AddPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlateView.swift; sourceTree = "<group>"; };
+		997F59922C71905200BE491E /* PlateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateDetailView.swift; sourceTree = "<group>"; };
+		997F59942C7195C400BE491E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		997F59A22C71A9A200BE491E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +70,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				997F599A2C71964F00BE491E /* FirebaseDatabase in Frameworks */,
+				997F59982C71964F00BE491E /* FirebaseAnalytics in Frameworks */,
+				997F599E2C71964F00BE491E /* FirebaseStorageCombine-Community in Frameworks */,
+				997F59A12C71977100BE491E /* FirebaseFirestore in Frameworks */,
+				997F599C2C71964F00BE491E /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +102,7 @@
 				997F596C2C7185BF00BE491E /* CarDataAPPTests */,
 				997F59762C7185BF00BE491E /* CarDataAPPUITests */,
 				997F59552C7185BE00BE491E /* Products */,
+				997F599F2C71977100BE491E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,12 +119,17 @@
 		997F59562C7185BE00BE491E /* CarDataAPP */ = {
 			isa = PBXGroup;
 			children = (
+				997F59942C7195C400BE491E /* GoogleService-Info.plist */,
 				997F59572C7185BE00BE491E /* CarDataAPPApp.swift */,
 				997F59592C7185BE00BE491E /* ContentView.swift */,
 				997F595B2C7185BF00BE491E /* Assets.xcassets */,
 				997F59602C7185BF00BE491E /* Persistence.swift */,
 				997F59622C7185BF00BE491E /* CarDataAPP.xcdatamodeld */,
 				997F595D2C7185BF00BE491E /* Preview Content */,
+				997F598E2C71900600BE491E /* CarPlateID.swift */,
+				997F59902C71903D00BE491E /* AddPlateView.swift */,
+				997F59922C71905200BE491E /* PlateDetailView.swift */,
+				997F59A22C71A9A200BE491E /* ImagePicker.swift */,
 			);
 			path = CarDataAPP;
 			sourceTree = "<group>";
@@ -133,6 +159,13 @@
 			path = CarDataAPPUITests;
 			sourceTree = "<group>";
 		};
+		997F599F2C71977100BE491E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,6 +182,13 @@
 			dependencies = (
 			);
 			name = CarDataAPP;
+			packageProductDependencies = (
+				997F59972C71964F00BE491E /* FirebaseAnalytics */,
+				997F59992C71964F00BE491E /* FirebaseDatabase */,
+				997F599B2C71964F00BE491E /* FirebaseStorage */,
+				997F599D2C71964F00BE491E /* FirebaseStorageCombine-Community */,
+				997F59A02C71977100BE491E /* FirebaseFirestore */,
+			);
 			productName = CarDataAPP;
 			productReference = 997F59542C7185BE00BE491E /* CarDataAPP.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +261,9 @@
 				Base,
 			);
 			mainGroup = 997F594B2C7185BE00BE491E;
+			packageReferences = (
+				997F59962C71964F00BE491E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 997F59552C7185BE00BE491E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -239,6 +282,7 @@
 			files = (
 				997F595F2C7185BF00BE491E /* Preview Assets.xcassets in Resources */,
 				997F595C2C7185BF00BE491E /* Assets.xcassets in Resources */,
+				997F59952C7195C400BE491E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,10 +307,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				997F598F2C71900600BE491E /* CarPlateID.swift in Sources */,
 				997F59642C7185BF00BE491E /* CarDataAPP.xcdatamodeld in Sources */,
 				997F59612C7185BF00BE491E /* Persistence.swift in Sources */,
+				997F59A32C71A9A200BE491E /* ImagePicker.swift in Sources */,
 				997F595A2C7185BE00BE491E /* ContentView.swift in Sources */,
+				997F59932C71905200BE491E /* PlateDetailView.swift in Sources */,
 				997F59582C7185BE00BE491E /* CarDataAPPApp.swift in Sources */,
+				997F59912C71903D00BE491E /* AddPlateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +481,7 @@
 				DEVELOPMENT_TEAM = GLJ8Z56ANQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -462,6 +511,7 @@
 				DEVELOPMENT_TEAM = GLJ8Z56ANQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -596,6 +646,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		997F59962C71964F00BE491E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		997F59972C71964F00BE491E /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997F59962C71964F00BE491E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		997F59992C71964F00BE491E /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997F59962C71964F00BE491E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		997F599B2C71964F00BE491E /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997F59962C71964F00BE491E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		997F599D2C71964F00BE491E /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997F59962C71964F00BE491E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+		997F59A02C71977100BE491E /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997F59962C71964F00BE491E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		997F59622C7185BF00BE491E /* CarDataAPP.xcdatamodeld */ = {
