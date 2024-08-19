@@ -13,6 +13,7 @@ struct AddPlateView: View {
     var onSave: (CarPlate) -> Void
     @State private var plateNumber: String = ""
     @State private var showingScanner = false
+    @State private var alertMessage: AlertMessage?
     
     var body: some View {
         VStack(spacing: 20) {
@@ -53,7 +54,12 @@ struct AddPlateView: View {
                 .padding(.horizontal, 16)
                 .sheet(isPresented: $showingScanner) {
                     PlateScannerView { scannedText in
-                        plateNumber = scannedText
+                        let formattedScannedText = formatPlateNumber(scannedText)
+                        if plateNumber == formattedScannedText {
+                            alertMessage = AlertMessage(message: "此車牌已掃描過")
+                        } else {
+                            plateNumber = formattedScannedText
+                        }
                         showingScanner = false
                     }
                 }
@@ -85,24 +91,85 @@ struct AddPlateView: View {
         .onTapGesture {
             hideKeyboard()
         }
+        .alert(item: $alertMessage) { alertMessage in
+            Alert(title: Text(alertMessage.message))
+        }
     }
 
     private func formatPlateNumber(_ input: String) -> String {
         let digitsAndLetters = input.uppercased().filter { $0.isLetter || $0.isNumber }
-        let formatted = digitsAndLetters.prefix(3) + "-" + digitsAndLetters.dropFirst(3).prefix(4)
-        return String(formatted)
+        
+        switch digitsAndLetters.count {
+        case 5:
+            if digitsAndLetters.prefix(2).allSatisfy({ $0.isLetter }) {
+                // 2英文 3數字
+                return "\(digitsAndLetters.prefix(2))-\(digitsAndLetters.dropFirst(2))"
+            } else if digitsAndLetters.suffix(2).allSatisfy({ $0.isLetter }) {
+                // 3數字 2英文
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.suffix(2))"
+            } else {
+                return digitsAndLetters
+            }
+            
+        case 6:
+            if digitsAndLetters.prefix(3).allSatisfy({ $0.isLetter }) {
+                // 3英文 3數字
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.dropFirst(3))"
+            } else if digitsAndLetters.suffix(3).allSatisfy({ $0.isLetter }) {
+                // 3數字 3英文
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.suffix(3))"
+            } else {
+                return digitsAndLetters
+            }
+            
+        case 7:
+            if digitsAndLetters.prefix(3).allSatisfy({ $0.isLetter }) {
+                // 3英文 4數字
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.dropFirst(3))"
+            } else if digitsAndLetters.suffix(2).allSatisfy({ $0.isLetter }) {
+                // 4數字 2英文
+                return "\(digitsAndLetters.prefix(4))-\(digitsAndLetters.suffix(2))"
+            } else {
+                return digitsAndLetters
+            }
+            
+        default:
+            return digitsAndLetters
+        }
     }
 
     private func isValidPlateNumber(_ input: String) -> Bool {
-        let pattern = "^[A-Z]{3}-[0-9]{4}$"
-        let regex = try! NSRegularExpression(pattern: pattern)
-        let range = NSRange(location: 0, length: input.utf16.count)
-        return regex.firstMatch(in: input, options: [], range: range) != nil
+        let formattedInput = formatPlateNumber(input)
+        let patterns = [
+            "^[A-Z]{3}-[0-9]{4}$",  // 3英文 4數字
+            "^[A-Z]{3}-[0-9]{3}$",  // 3英文 3數字
+            "^[A-Z]{2}-[0-9]{3}$",  // 2英文 3數字
+            "^[A-Z]{3}-[0-9]{2}$",  // 3英文 2數字
+            "^[0-9]{4}-[A-Z]{2}$",  // 4數字 2英文
+            "^[0-9]{3}-[A-Z]{2}$",  // 3數字 2英文
+            "^[0-9]{3}-[A-Z]{3}$"   // 3數字 3英文
+        ]
+        
+        for pattern in patterns {
+            let regex = try! NSRegularExpression(pattern: pattern)
+            let range = NSRange(location: 0, length: formattedInput.utf16.count)
+            if regex.firstMatch(in: formattedInput, options: [], range: range) != nil {
+                return true
+            }
+        }
+        
+        return false
     }
-    
+
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+}
+
+// 自定義 AlertMessage 結構
+struct AlertMessage: Identifiable {
+    let id = UUID() // 確保每個消息都有唯一的 ID
+    let message: String
 }
 
 // 這個是掃描器的視圖
@@ -189,9 +256,61 @@ class PlateScannerViewController: UIViewController, AVCaptureVideoDataOutputSamp
     }
     
     private func isValidPlateNumber(_ input: String) -> Bool {
-        let pattern = "^[A-Z]{3}-[0-9]{4}$"
-        let regex = try! NSRegularExpression(pattern: pattern)
-        let range = NSRange(location: 0, length: input.utf16.count)
-        return regex.firstMatch(in: input, options: [], range: range) != nil
+        let formattedInput = formatPlateNumber(input)
+        let patterns = [
+            "^[A-Z]{3}-[0-9]{4}$",  // 3英文 4數字
+            "^[A-Z]{3}-[0-9]{3}$",  // 3英文 3數字
+            "^[A-Z]{2}-[0-9]{3}$",  // 2英文 3數字
+            "^[A-Z]{3}-[0-9]{2}$",  // 3英文 2數字
+            "^[0-9]{4}-[A-Z]{2}$",  // 4數字 2英文
+            "^[0-9]{3}-[A-Z]{2}$",  // 3數字 2英文
+            "^[0-9]{3}-[A-Z]{3}$"   // 3數字 3英文
+        ]
+        
+        for pattern in patterns {
+            let regex = try! NSRegularExpression(pattern: pattern)
+            let range = NSRange(location: 0, length: formattedInput.utf16.count)
+            if regex.firstMatch(in: formattedInput, options: [], range: range) != nil {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    private func formatPlateNumber(_ input: String) -> String {
+        let digitsAndLetters = input.uppercased().filter { $0.isLetter || $0.isNumber }
+        
+        switch digitsAndLetters.count {
+        case 5:
+            if digitsAndLetters.prefix(2).allSatisfy({ $0.isLetter }) {
+                return "\(digitsAndLetters.prefix(2))-\(digitsAndLetters.dropFirst(2))"
+            } else if digitsAndLetters.suffix(2).allSatisfy({ $0.isLetter }) {
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.suffix(2))"
+            } else {
+                return digitsAndLetters
+            }
+            
+        case 6:
+            if digitsAndLetters.prefix(3).allSatisfy({ $0.isLetter }) {
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.dropFirst(3))"
+            } else if digitsAndLetters.suffix(3).allSatisfy({ $0.isLetter }) {
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.suffix(3))"
+            } else {
+                return digitsAndLetters
+            }
+            
+        case 7:
+            if digitsAndLetters.prefix(3).allSatisfy({ $0.isLetter }) {
+                return "\(digitsAndLetters.prefix(3))-\(digitsAndLetters.dropFirst(3))"
+            } else if digitsAndLetters.suffix(2).allSatisfy({ $0.isLetter }) {
+                return "\(digitsAndLetters.prefix(4))-\(digitsAndLetters.suffix(2))"
+            } else {
+                return digitsAndLetters
+            }
+            
+        default:
+            return digitsAndLetters
+        }
     }
 }

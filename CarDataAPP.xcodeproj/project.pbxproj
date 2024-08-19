@@ -27,6 +27,8 @@
 		997F59A12C71977100BE491E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 997F59A02C71977100BE491E /* FirebaseFirestore */; };
 		997F59A32C71A9A200BE491E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59A22C71A9A200BE491E /* ImagePicker.swift */; };
 		997F59A52C73199D00BE491E /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59A42C73199D00BE491E /* PhotoDetailView.swift */; };
+		997F59A72C73445D00BE491E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59A62C73445D00BE491E /* SearchView.swift */; };
+		997F59AA2C736F3700BE491E /* CarPlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997F59A92C736F3700BE491E /* CarPlateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 		997F59942C7195C400BE491E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		997F59A22C71A9A200BE491E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		997F59A42C73199D00BE491E /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		997F59A62C73445D00BE491E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		997F59A82C7368B300BE491E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		997F59A92C736F3700BE491E /* CarPlateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,18 +126,16 @@
 		997F59562C7185BE00BE491E /* CarDataAPP */ = {
 			isa = PBXGroup;
 			children = (
-				997F59942C7195C400BE491E /* GoogleService-Info.plist */,
-				997F59572C7185BE00BE491E /* CarDataAPPApp.swift */,
 				997F59592C7185BE00BE491E /* ContentView.swift */,
+				997F59572C7185BE00BE491E /* CarDataAPPApp.swift */,
+				997F59AC2C73842100BE491E /* PhotoView */,
+				997F59AB2C73840200BE491E /* Plate */,
+				997F59A82C7368B300BE491E /* Info.plist */,
+				997F59942C7195C400BE491E /* GoogleService-Info.plist */,
 				997F595B2C7185BF00BE491E /* Assets.xcassets */,
 				997F59602C7185BF00BE491E /* Persistence.swift */,
 				997F59622C7185BF00BE491E /* CarDataAPP.xcdatamodeld */,
 				997F595D2C7185BF00BE491E /* Preview Content */,
-				997F598E2C71900600BE491E /* CarPlateID.swift */,
-				997F59902C71903D00BE491E /* AddPlateView.swift */,
-				997F59922C71905200BE491E /* PlateDetailView.swift */,
-				997F59A22C71A9A200BE491E /* ImagePicker.swift */,
-				997F59A42C73199D00BE491E /* PhotoDetailView.swift */,
 			);
 			path = CarDataAPP;
 			sourceTree = "<group>";
@@ -167,6 +170,27 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		997F59AB2C73840200BE491E /* Plate */ = {
+			isa = PBXGroup;
+			children = (
+				997F59A62C73445D00BE491E /* SearchView.swift */,
+				997F598E2C71900600BE491E /* CarPlateID.swift */,
+				997F59A92C736F3700BE491E /* CarPlateView.swift */,
+				997F59922C71905200BE491E /* PlateDetailView.swift */,
+				997F59902C71903D00BE491E /* AddPlateView.swift */,
+			);
+			path = Plate;
+			sourceTree = "<group>";
+		};
+		997F59AC2C73842100BE491E /* PhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				997F59A42C73199D00BE491E /* PhotoDetailView.swift */,
+				997F59A22C71A9A200BE491E /* ImagePicker.swift */,
+			);
+			path = PhotoView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,12 +334,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				997F59A72C73445D00BE491E /* SearchView.swift in Sources */,
 				997F598F2C71900600BE491E /* CarPlateID.swift in Sources */,
 				997F59642C7185BF00BE491E /* CarDataAPP.xcdatamodeld in Sources */,
 				997F59612C7185BF00BE491E /* Persistence.swift in Sources */,
 				997F59A32C71A9A200BE491E /* ImagePicker.swift in Sources */,
 				997F595A2C7185BE00BE491E /* ContentView.swift in Sources */,
 				997F59932C71905200BE491E /* PlateDetailView.swift in Sources */,
+				997F59AA2C736F3700BE491E /* CarPlateView.swift in Sources */,
 				997F59582C7185BE00BE491E /* CarDataAPPApp.swift in Sources */,
 				997F59912C71903D00BE491E /* AddPlateView.swift in Sources */,
 				997F59A52C73199D00BE491E /* PhotoDetailView.swift in Sources */,
@@ -485,6 +511,7 @@
 				DEVELOPMENT_TEAM = GLJ8Z56ANQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CarDataAPP/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -515,6 +542,7 @@
 				DEVELOPMENT_TEAM = GLJ8Z56ANQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CarDataAPP/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

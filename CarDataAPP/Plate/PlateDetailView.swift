@@ -33,26 +33,6 @@ struct PlateDetailView: View {
                 .lineLimit(1)
                 .truncationMode(.tail)
 
-            // 保存按鈕
-            Button(action: {
-                saveImages()
-                onSave(plate)
-            }) {
-                HStack {
-                    Image(systemName: "square.and.arrow.down")
-                    Text("儲存")
-                }
-                .font(.title2)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(plate.number.isEmpty ? Color.gray : Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .shadow(radius: 5)
-            }
-            .padding([.leading, .trailing], 16)
-            .disabled(plate.number.isEmpty)
-
             // 拍照按鈕
             Button(action: {
                 showingImagePicker = true
@@ -82,15 +62,33 @@ struct PlateDetailView: View {
             // 顯示拍攝的照片列表
             ScrollView {
                 ForEach(images.indices, id: \.self) { index in
-                    NavigationLink(destination: PhotoDetailView(image: images[index], notesFileName: "notes\(index).txt")) {
-                        Image(uiImage: images[index])
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity) // 照片佔滿寬度
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
+                    ZStack(alignment: .topTrailing) {
+                        // 照片
+                        NavigationLink(destination: PhotoDetailView(image: images[index], notesFileName: "notes\(index).txt")) {
+                            Image(uiImage: images[index])
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(10)
+                                .shadow(radius: 5)
+                        }
+
+                        // 刪除按鈕
+                        Button(action: {
+                            // 彈出確認刪除的 alert
+                            deleteImage(at: index)
+                        }) {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                                .padding()
+                                .background(Color.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                        }
+                        .padding(.trailing, 10)
+                        .padding(.top, 10)
                     }
                 }
             }
@@ -108,6 +106,31 @@ struct PlateDetailView: View {
         .onTapGesture {
             hideKeyboard()
         }
+        .alert(isPresented: $showingDeleteAlert) {
+            Alert(
+                title: Text("確定刪除照片嗎？"),
+                primaryButton: .destructive(Text("刪除")) {
+                    deleteConfirmed(at: indexToDelete)
+                },
+                secondaryButton: .cancel(Text("取消"))
+            )
+        }
+    }
+
+    @State private var showingDeleteAlert = false
+    @State private var indexToDelete: Int?
+
+    // 確認刪除前彈出 alert
+    private func deleteImage(at index: Int) {
+        indexToDelete = index
+        showingDeleteAlert = true
+    }
+
+    // 確認刪除操作
+    private func deleteConfirmed(at index: Int?) {
+        guard let index = index else { return }
+        images.remove(at: index)
+        saveImages()
     }
 
     // 儲存圖片到應用的文檔目錄
