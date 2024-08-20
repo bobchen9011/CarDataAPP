@@ -55,7 +55,7 @@ struct ContentView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                         .frame(width: 250, height: 100)
-                        .background(Color.yellow)
+                        .background(Color.gray)
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
@@ -65,15 +65,12 @@ struct ContentView: View {
                         .padding()
                 } else {
                     ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))], spacing: 20) {
+                        LazyVGrid(columns: [GridItem(.flexible())], spacing: 20) {
                             ForEach(plates.filter { $0.number.contains(searchText) || searchText.isEmpty }) { plate in
-                                CarPlateView(
-                                    plate: plate,
-                                   
-                                    onDelete: {
-                                        deletePlate(plate)
-                                    }
-                                )
+                                CarPlateView(plate: plate) {
+                                    deletePlate(plate)
+                                }
+                                .frame(maxWidth: .infinity)
                             }
                         }
                         .padding()
@@ -90,17 +87,18 @@ struct ContentView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
-                            .frame(width: 350, height: 100) // 調整寬高
-                            .background(Color.yellow)        // 背景顏色
-                            .cornerRadius(10)                // 圓角
+                            .frame(width: 250, height: 70)
+                            .background(Color.gray)
+                            .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 4)  // 黑色邊框
+                                    .stroke(Color.black, lineWidth: 4)
                             )
-                            .shadow(radius: 5)                // 添加陰影
+                            .shadow(radius: 5)
                             .padding()
-                            .lineLimit(1)                     // 確保單行顯示
+                            .lineLimit(1)
                             .truncationMode(.tail)
+
                     }
                 }
             }
@@ -188,6 +186,32 @@ struct ContentView: View {
 
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+struct CarPlateView1: View {
+    let plate: CarPlate
+    let onDelete: () -> Void
+
+    var body: some View {
+        HStack {
+            Text(plate.number)
+                .font(.title)
+                .fontWeight(.bold)
+                .minimumScaleFactor(0.5)  // 最小縮放比例
+                .lineLimit(1)
+                .truncationMode(.middle)  // 中間截斷
+                .padding()
+            Spacer()
+            Button(action: onDelete) {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }
+            .padding()
+        }
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
 }
 

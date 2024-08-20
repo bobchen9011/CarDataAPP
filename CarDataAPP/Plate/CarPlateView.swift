@@ -22,8 +22,8 @@ struct CarPlateView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
-                    .frame(width: 200, height: 100)
-                    .background(Color.yellow)
+                    .frame(width: 250, height: 70)
+                    .background(Color.gray)
                     .cornerRadius(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
@@ -42,7 +42,7 @@ struct CarPlateView: View {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
                     .padding()
-                    .background(Color.white)
+                    .background(Color.gray)
                     .clipShape(Circle())
                     .shadow(radius: 5)
             }

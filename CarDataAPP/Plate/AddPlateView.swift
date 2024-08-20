@@ -45,13 +45,14 @@ struct AddPlateView: View {
                             .fontWeight(.bold)
                     }
                     .font(.title2)
-                    .padding()
-                    .background(Color.orange)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
-                }
-                .padding(.horizontal, 16)
+                                        .padding()
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color.orange)
+                                                .shadow(radius: 5)
+                                        )
+                                        .foregroundColor(.white)
+                                    }
                 .sheet(isPresented: $showingScanner) {
                     PlateScannerView { scannedText in
                         let formattedScannedText = formatPlateNumber(scannedText)
